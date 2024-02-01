@@ -13,7 +13,6 @@ export default function Footer() {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#F4CE14',
-    marginBottom: 10
   },
   text: {
     fontSize: 18,

@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 
-
-export default function WelcomeScreen() {
+const WelcomeScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>
@@ -14,7 +13,7 @@ export default function WelcomeScreen() {
       </Text>
     </View>
   )
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -33,4 +32,7 @@ const styles = StyleSheet.create({
     padding: 20,
     marginVertical: 8,
   }
-})
+});
+
+
+export default WelcomeScreen;
