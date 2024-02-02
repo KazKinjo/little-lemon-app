@@ -21,14 +21,14 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 30,
-    color: '#EDEFEE',
-    textAlign: 'center',
+    color: "#EDEFEE",
+    textAlign: "center",
     padding: 40,
   },
   text: {
     fontSize: 24,
-    color: '#EDEFEE',
-    textAlign: 'center',
+    color: "#EDEFEE",
+    textAlign: "center",
     padding: 20,
     marginVertical: 8,
   },

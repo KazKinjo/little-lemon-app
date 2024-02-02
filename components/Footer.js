@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 
-export default function Footer() {
+const Footer = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>
@@ -12,11 +12,14 @@ export default function Footer() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#F4CE14',
+    backgroundColor: "#F4CE14",
   },
   text: {
     fontSize: 18,
-    color: '#333333',
-    textAlign: 'center'
+    color: "#333333",
+    textAlign: "center",
   }
 });
+
+
+export default Footer;
