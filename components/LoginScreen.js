@@ -1,46 +1,62 @@
 import { useState } from "react";
-import { ScrollView, Text, StyleSheet, TextInput, Pressable } from 'react-native';
+import { ScrollView, Text, StyleSheet, TextInput, Pressable, useColorScheme } from 'react-native';
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
   const [email, onChangeEmail] = useState('');
   const [password, onChangePassword] = useState('');
-  const [loggedIn, onLogin] = useState(false);
+
+  const colorScheme = useColorScheme();
 
   return (
-    <ScrollView style={styles.container} keyboardDismissMode="on-drag">
-      <Text style={styles.headerText}>Welcome to Little Lemon</Text>
-
-      {loggedIn && (
-        <Text style={styles.headerText}>You are logged in!</Text>
-      )}
-
-      {!loggedIn && (
-        <>
-          <Text style={styles.regularText}>Login to continue</Text>
-          <TextInput
-            style={styles.input}
-            value={email}
-            placeholder={"email"}
-            onChangeText={onChangeEmail}
-            keyboardType={"email-address"}
-            clearButtonMode={"while-editing"}
-          />
-          <TextInput
-            style={styles.input}
-            value={password}
-            placeholder={"password"}
-            onChangeText={onChangePassword}
-            secureTextEntry={true}
-            clearButtonMode={"while-editing"}
-          />
-          <Pressable
-            style={styles.button}
-            onPress={() => { onLogin(!loggedIn) }}
-          >
-            <Text style={styles.buttonText}>Login</Text>
-          </Pressable>
-        </>
-      )}
+    <ScrollView
+      style={[
+        styles.container,
+        keyboardDismissMode = "on-drag",
+        colorScheme === "light"
+          ? { backgroundColor: "#495E57" }
+          : { backgroundColor: "#333333" }
+      ]}
+    >
+      <Text
+        style={[
+          styles.headerText,
+          colorScheme === "light"
+            ? { color: "#EDEFEE" }
+            : { color: "#FFFFFF" }
+        ]}
+      >
+        Welcome to Little Lemon</Text>
+      <Text
+        style={[
+          styles.regularText,
+          colorScheme === "light"
+            ? { color: "#EDEFEE" }
+            : { color: "#FFFFFF" }
+        ]}
+      >
+        Login to continue</Text>
+      <TextInput
+        style={styles.input}
+        value={email}
+        placeholder={"email"}
+        onChangeText={onChangeEmail}
+        keyboardType={"email-address"}
+        clearButtonMode={"while-editing"}
+      />
+      <TextInput
+        style={styles.input}
+        value={password}
+        placeholder={"password"}
+        onChangeText={onChangePassword}
+        secureTextEntry={true}
+        clearButtonMode={"while-editing"}
+      />
+      <Pressable
+        style={styles.button}
+        onPress={() => navigation.navigate("Welcome")}
+      >
+        <Text style={styles.buttonText}>Login</Text>
+      </Pressable>
     </ScrollView>
   );
 }

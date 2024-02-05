@@ -1,6 +1,6 @@
-import { View, StyleSheet, Text, Image, ScrollView, useColorScheme } from "react-native";
+import { View, StyleSheet, Text, Image, ScrollView, useColorScheme, Pressable } from "react-native";
 
-const WelcomeScreen = () => {
+const WelcomeScreen = ({ navigation }) => {
   const colorScheme = useColorScheme();
 
   return (
@@ -8,7 +8,7 @@ const WelcomeScreen = () => {
       style={[
         styles.container,
         colorScheme === "light"
-          ? { backgroundColor: "#FFFFFF" }
+          ? { backgroundColor: "#495E57" }
           : { backgroundColor: "#333333" }
       ]}
     >
@@ -24,7 +24,7 @@ const WelcomeScreen = () => {
           style={[
             styles.headerText,
             colorScheme === "light"
-              ? { color: "#333333" }
+              ? { color: "#EDEFEE" }
               : { color: "#FFFFFF" }
           ]}
         >
@@ -35,7 +35,7 @@ const WelcomeScreen = () => {
         style={[
           styles.text,
           colorScheme === "light"
-            ? { color: "#333333" }
+            ? { color: "#EDEFEE" }
             : { color: "#FFFFFF" }
         ]}
       >
@@ -43,6 +43,14 @@ const WelcomeScreen = () => {
         and classic cocktails in a lively but casual environment. We would love
         to hear more about your experience with us!
       </Text>
+      <Pressable
+        style={styles.button}
+        onPress={() => navigation.navigate("Login")}
+      >
+        <Text style={styles.buttonText}>
+          Signup
+        </Text>
+      </Pressable>
     </ScrollView>
   )
 };
@@ -60,7 +68,6 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: "#EDEFEE",
     textAlign: "center",
-    padding: 40,
   },
   text: {
     fontSize: 24,
@@ -72,6 +79,19 @@ const styles = StyleSheet.create({
   logo: {
     height: 100,
     width: 100,
+  },
+  button: {
+    padding: 10,
+    margin: 40,
+    backgroundColor: "#F4CE14",
+    borderColor: "#F4CE14",
+    borderWidth: 2,
+    borderRadius: 50,
+  },
+  buttonText: {
+    fontSize: 25,
+    color: "#333333",
+    textAlign: "center"
   }
 });
 
