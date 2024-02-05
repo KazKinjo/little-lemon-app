@@ -1,23 +1,37 @@
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, Image, ScrollView } from "react-native";
 
 const WelcomeScreen = () => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.headerText}>
-        Welcome to Little Lemon
-      </Text>
+    <ScrollView style={styles.container}>
+      <View style={styles.innerContainer}>
+        <Image
+          style={styles.logo}
+          source={require("../img/Image-1.png")}
+          resizeMethod={"cover"}
+          accessible={true}
+          accessibilityLabel={"Little lemon Logo"}
+        />
+        <Text style={styles.headerText}>
+          Little Lemon
+        </Text>
+      </View>
       <Text style={styles.text}>
         Little Lemon is a charming neighborhood bistro that serves simple food
         and classic cocktails in a lively but casual environment. We would love
         to hear more about your experience with us!
       </Text>
-    </View>
+    </ScrollView>
   )
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  innerContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    margin: 10,
   },
   headerText: {
     fontSize: 30,
@@ -32,6 +46,10 @@ const styles = StyleSheet.create({
     padding: 20,
     marginVertical: 8,
   },
+  logo: {
+    height: 100,
+    width: 100,
+  }
 });
 
 
