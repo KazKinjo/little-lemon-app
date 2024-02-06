@@ -1,22 +1,20 @@
 import { Image, StyleSheet, View } from 'react-native';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import MenuItems from './components/MenuItems';
 import WelcomeScreen from './components/WelcomeScreen';
 import LoginScreen from './components/LoginScreen';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
-const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
-function LogoTitle() {
+function HomeLogo() {
   return (
     <Image
       source={require("./img/LIttle-Lemon-Logo.png")}
       resizeMode='contain'
       style={{
-        height: 40,
-        width: 300,
+        height: 30,
+        width: 200,
         alignItems: "center",
       }}
     />
@@ -24,27 +22,34 @@ function LogoTitle() {
 };
 
 export default function App() {
-
   return (
     <NavigationContainer>
       <View style={styles.container}>
-        <Stack.Navigator
-          initialRouteName="Welcome"
-          screenOptions={{
-            headerStyle: { backgroundColor: "#EDEFEE" },
-            headerTintColor: "#333333",
-            headerTitleStyle: {
-              fontWeight: "bold",
+        <Tab.Navigator
+          initialRouteName="Home"
+          screenOptions={({ route }) => ({
+            tabBarIcon: ({ color, size }) => {
+              let iconName;
+              if (route.name === "Home") {
+                iconName = "home";
+              } else if (route.name === "Login") {
+                iconName = "enter";
+              }
+              return <Ionicons name={iconName} color={color} size={size} />
             },
-          }}
+            tabBarActiveTintColor: "#333333",
+          })}
         >
-          <Stack.Screen
-            name="Welcome"
+          <Tab.Screen
+            name="Home"
             component={WelcomeScreen}
-            options={{ title: "Home", headerTitle: (props) => <LogoTitle {...props} /> }}
+            options={{ headerTitle: (props) => <HomeLogo {...props} /> }}
           />
-          <Stack.Screen name="Login" component={LoginScreen} />
-        </Stack.Navigator>
+          <Tab.Screen
+            name="Login"
+            component={LoginScreen}
+          />
+        </Tab.Navigator>
       </View>
     </NavigationContainer>
   );

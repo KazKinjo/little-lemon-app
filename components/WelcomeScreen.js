@@ -16,7 +16,7 @@ const WelcomeScreen = ({ navigation }) => {
         <Image
           style={styles.logo}
           source={require("../img/Image-1.png")}
-          resizeMethod="cover"
+          resizeMode="cover"
           accessible={true}
           accessibilityLabel={"Little lemon Logo"}
         />
