@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
 
-const Footer = () => {
+export default function Footer() {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>
         All rights reserved by Little Lemon, 2024
       </Text>
     </View>
-  );
-}
+  )
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -20,6 +20,3 @@ const styles = StyleSheet.create({
     textAlign: "center",
   }
 });
-
-
-export default Footer;

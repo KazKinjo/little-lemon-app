@@ -1,41 +1,58 @@
 import { useState } from "react";
-import { Alert, Image, Pressable, StyleSheet, Text, TextInput, View } from "react-native"
+import {
+  Alert,
+  Image,
+  KeyboardAvoidingView,
+  Platform,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput
+} from "react-native"
 
-export default function SubscribeScreen({ navigation }) {
-  const [email, onChangeEmail] = useState("");
-  // const isEmailValid = validateEmail(email);
+import { validateEmail } from "../utils";
+
+export default function SubscribeScreen() {
+  const [email, setEmail] = useState("");
+  const isEmailValid = validateEmail(email);
 
   return (
-    <View style={styles.container}>
-      <Image
-        style={styles.logo}
-        resizeMode="contain"
-        source={require("../img/little-lemon-logo-main.png")}
-      />
-      <Text style={styles.heading}>
-        Subscribe to our newsletter for
-        our latest delicious recipes!
-      </Text>
-      <TextInput
-        style={styles.inputBox}
-        value={email}
-        onChangeText={onChangeEmail}
-        clearButtonMode={"while-edditing"}
-        placeholder="Please enter your email address"
-        keyboardType="email-address"
-      />
-      <Pressable
-        style={styles.button}
-        onPress={() => {
-          Alert.alert("Thanks for subscribing, stay tuned!");
-          onChangeEmail("");
-        }}
-      >
-        <Text style={styles.buttonText}>
-          Subscribe
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    >
+      <ScrollView keyboardDismissMode="on-drag">
+        <Image
+          style={styles.logo}
+          source={require("../img/little-lemon-logo-main.png")}
+          resizeMode="contain"
+        />
+        <Text style={styles.headerText}>
+          Subscribe to our newsletter for
+          our latest delicious recipes!
         </Text>
-      </Pressable>
-    </View>
+        <TextInput
+          style={styles.inputBox}
+          value={email}
+          onChangeText={setEmail}
+          placeholder="Please enter your email address"
+          keyboardType="email-address"
+          clearButtonMode="while-edditing"
+        />
+        <Pressable
+          style={[styles.button, styles.disabled]}
+          onPress={() => {
+            Alert.alert("Thanks for subscribing, stay tuned!");
+          }}
+          disabled={!isEmailValid}
+        >
+          <Text style={styles.buttonText}>
+            Subscribe
+          </Text>
+        </Pressable>
+      </ScrollView>
+    </KeyboardAvoidingView>
   )
 };
 
@@ -50,7 +67,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginVertical: 50,
   },
-  heading: {
+  headerText: {
     color: "#333333",
     fontSize: 18,
     fontWeight: "bold",
@@ -62,16 +79,22 @@ const styles = StyleSheet.create({
     padding: 10,
     borderWidth: 1,
     borderRadius: 8,
+    borderColor: "#333333",
     backgroundColor: "#FFFFFF",
   },
   button: {
-    marginVertical: 30,
-    marginHorizontal: 50,
     padding: 10,
+    marginHorizontal: 50,
+    marginVertical: 20,
     backgroundColor: "#F4CE14",
     borderColor: "#F4CE14",
     borderWidth: 1,
     borderRadius: 16,
+  },
+  disabled: {
+    borderColor: "#A9A9A9",
+    backgroundColor: "#A9A9A9",
+    opacity: 0.5,
   },
   buttonText: {
     color: "#333333",

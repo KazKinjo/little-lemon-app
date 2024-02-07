@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 
-const Header = () => {
+export default function Header() {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>
@@ -22,6 +22,3 @@ const styles = StyleSheet.create({
     textAlign: "center",
   }
 });
-
-
-export default Header;

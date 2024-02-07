@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ScrollView, Text, StyleSheet, TextInput, Pressable, useColorScheme } from 'react-native';
 
-const LoginScreen = ({ navigation }) => {
+export default function LoginScreen({ navigation }) {
   const [email, onChangeEmail] = useState('');
   const [password, onChangePassword] = useState('');
 
@@ -25,18 +25,10 @@ const LoginScreen = ({ navigation }) => {
             : { color: "#FFFFFF" }
         ]}
       >
-        Welcome to Little Lemon</Text>
-      <Text
-        style={[
-          styles.regularText,
-          colorScheme === "light"
-            ? { color: "#EDEFEE" }
-            : { color: "#FFFFFF" }
-        ]}
-      >
-        Login to continue</Text>
+        Welcome to Little Lemon
+      </Text>
       <TextInput
-        style={styles.input}
+        style={styles.inputBox}
         value={email}
         placeholder={"email"}
         onChangeText={onChangeEmail}
@@ -44,7 +36,7 @@ const LoginScreen = ({ navigation }) => {
         clearButtonMode={"while-editing"}
       />
       <TextInput
-        style={styles.input}
+        style={styles.inputBox}
         value={password}
         placeholder={"password"}
         onChangeText={onChangePassword}
@@ -55,7 +47,9 @@ const LoginScreen = ({ navigation }) => {
         style={styles.button}
         onPress={() => navigation.navigate("Home")}
       >
-        <Text style={styles.buttonText}>Login</Text>
+        <Text style={styles.buttonText}>
+          Login
+        </Text>
       </Pressable>
     </ScrollView>
   );
@@ -66,40 +60,38 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headerText: {
-    fontSize: 30,
     color: "#EDEFEE",
-    textAlign: "center",
+    fontSize: 30,
     padding: 40,
+    textAlign: "center",
   },
   regularText: {
-    fontSize: 24,
     color: "#EDEFEE",
-    textAlign: "center",
+    fontSize: 24,
     padding: 20,
+    textAlign: "center",
   },
-  input: {
+  inputBox: {
     height: 40,
-    margin: 12,
+    margin: 30,
+    padding: 10,
     borderWidth: 1,
+    borderRadius: 8,
     borderColor: "#EDEFEE",
     backgroundColor: "#EDEFEE",
-    padding: 10,
-    fontSize: 16,
   },
   button: {
     padding: 10,
-    margin: 100,
+    marginHorizontal: 50,
+    marginVertical: 20,
     backgroundColor: "#F4CE14",
     borderColor: "#F4CE14",
-    borderWidth: 2,
-    borderRadius: 50,
+    borderWidth: 1,
+    borderRadius: 16,
   },
   buttonText: {
-    fontSize: 25,
     color: "#333333",
+    fontSize: 18,
     textAlign: "center"
   }
 });
-
-
-export default LoginScreen;

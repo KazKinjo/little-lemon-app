@@ -48,7 +48,7 @@ const Separator = () => <View style={styles.separator} />
 const Header = () => <Text style={styles.headerText}>View Menu</Text>
 const Footer = () => <Text style={styles.footerText}>All rights reserved by Little Lemon, 2024</Text>
 
-const Item = ({ name, price }) => {
+function Item({ name, price }) {
   return (
     <View style={styles.innerContainer}>
       <Text style={styles.itemText}>{name}</Text>
@@ -57,7 +57,7 @@ const Item = ({ name, price }) => {
   )
 }
 
-const MenuItems = () => {
+export default function MenuItems() {
   const renderItem = ({ item }) => <Item name={item.name} price={item.price} />;
 
   const renderSectionHeader = ({ section: { title } }) => (
@@ -121,6 +121,3 @@ const styles = StyleSheet.create({
     textAlign: "center"
   }
 });
-
-
-export default MenuItems;
