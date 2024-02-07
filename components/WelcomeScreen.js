@@ -51,6 +51,14 @@ const WelcomeScreen = ({ navigation }) => {
           Signup
         </Text>
       </Pressable>
+      <Pressable
+        style={styles.button}
+        onPress={() => navigation.navigate("Subscribe")}
+      >
+        <Text style={styles.buttonText}>
+          Subscribe
+        </Text>
+      </Pressable>
     </ScrollView>
   )
 };

@@ -1,11 +1,14 @@
 import { Image, StyleSheet, View } from 'react-native';
 import WelcomeScreen from './components/WelcomeScreen';
 import LoginScreen from './components/LoginScreen';
+import SubscribeScreen from './components/SubscribeScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 const Tab = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
 
 function HomeLogo() {
   return (
@@ -24,34 +27,41 @@ function HomeLogo() {
 export default function App() {
   return (
     <NavigationContainer>
-      <View style={styles.container}>
-        <Tab.Navigator
-          initialRouteName="Home"
-          screenOptions={({ route }) => ({
-            tabBarIcon: ({ color, size }) => {
-              let iconName;
-              if (route.name === "Home") {
-                iconName = "home";
-              } else if (route.name === "Login") {
-                iconName = "enter";
-              }
-              return <Ionicons name={iconName} color={color} size={size} />
-            },
-            tabBarActiveTintColor: "#333333",
-          })}
-        >
-          <Tab.Screen
-            name="Home"
-            component={WelcomeScreen}
-            options={{ headerTitle: (props) => <HomeLogo {...props} /> }}
-          />
-          <Tab.Screen
-            name="Login"
-            component={LoginScreen}
-          />
-        </Tab.Navigator>
-      </View>
+      <Drawer.Navigator>
+        <Drawer.Screen name='Home' component={WelcomeScreen} />
+        <Drawer.Screen name='Login' component={LoginScreen} />
+        <Drawer.Screen name='Subscribe' component={SubscribeScreen} />
+      </Drawer.Navigator>
     </NavigationContainer>
+    // <NavigationContainer>
+    //   <View style={styles.container}>
+    //     <Tab.Navigator
+    //       initialRouteName="Home"
+    //       screenOptions={({ route }) => ({
+    //         tabBarIcon: ({ color, size }) => {
+    //           let iconName;
+    //           if (route.name === "Home") {
+    //             iconName = "home";
+    //           } else if (route.name === "Login") {
+    //             iconName = "enter";
+    //           }
+    //           return <Ionicons name={iconName} color={color} size={size} />
+    //         },
+    //         tabBarActiveTintColor: "#333333",
+    //       })}
+    //     >
+    //       <Tab.Screen
+    //         name="Home"
+    //         component={WelcomeScreen}
+    //         options={{ headerTitle: (props) => <HomeLogo {...props} /> }}
+    //       />
+    //       <Tab.Screen
+    //         name="Login"
+    //         component={LoginScreen}
+    //       />
+    //     </Tab.Navigator>
+    //   </View>
+    // </NavigationContainer>
   );
 }
 
