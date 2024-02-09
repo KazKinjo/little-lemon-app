@@ -38,7 +38,7 @@ export default function SubscribeScreen() {
           onChangeText={setEmail}
           placeholder="Please enter your email address"
           keyboardType="email-address"
-          clearButtonMode="while-edditing"
+          clearButtonMode="while-editing"
         />
         <Pressable
           style={[styles.button, styles.disabled]}

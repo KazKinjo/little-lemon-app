@@ -1,11 +1,12 @@
-import { Image, StyleSheet, View } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import Ionicons from '@expo/vector-icons/Ionicons';
+import { Entypo, MaterialIcons, AntDesign } from '@expo/vector-icons';
 
 import WelcomeScreen from '../components/WelcomeScreen';
 import LoginScreen from '../components/LoginScreen';
 import SubscribeScreen from '../components/SubscribeScreen';
+import MenuItems from '../components/MenuItems';
 
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
@@ -26,40 +27,49 @@ function HomeLogo() {
 
 export default function RootNavigator() {
   return (
-    <Drawer.Navigator>
-      <Drawer.Screen name='Home' component={WelcomeScreen} />
-      <Drawer.Screen name='Login' component={LoginScreen} />
-      <Drawer.Screen name='Subscribe' component={SubscribeScreen} />
-    </Drawer.Navigator>
-    // <NavigationContainer>
-    //   <View style={styles.container}>
-    //     <Tab.Navigator
-    //       initialRouteName="Home"
-    //       screenOptions={({ route }) => ({
-    //         tabBarIcon: ({ color, size }) => {
-    //           let iconName;
-    //           if (route.name === "Home") {
-    //             iconName = "home";
-    //           } else if (route.name === "Login") {
-    //             iconName = "enter";
-    //           }
-    //           return <Ionicons name={iconName} color={color} size={size} />
-    //         },
-    //         tabBarActiveTintColor: "#333333",
-    //       })}
-    //     >
-    //       <Tab.Screen
-    //         name="Home"
-    //         component={WelcomeScreen}
-    //         options={{ headerTitle: (props) => <HomeLogo {...props} /> }}
-    //       />
-    //       <Tab.Screen
-    //         name="Login"
-    //         component={LoginScreen}
-    //       />
-    //     </Tab.Navigator>
-    //   </View>
-    // </NavigationContainer>
+    <Tab.Navigator
+      style={styles.container}
+      initialRouteName="Home"
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ size = 24, color = "black" }) => {
+          if (route.name === "Home") {
+            return <Entypo name="home" size={size} color={color} />
+          } else if (route.name === "Menu") {
+            return <MaterialIcons name="restaurant-menu" size={size} color={color} />
+          } else if (route.name === "Login") {
+            return <AntDesign name="login" size={size} color={color} />
+          } else if (route.name === "Subscription") {
+            return <MaterialIcons name="subscriptions" size={size} color={color} />
+          }
+        },
+        tabBarActiveTintColor: "#333333",
+      })}
+    >
+      <Tab.Screen
+        name="Home"
+        component={WelcomeScreen}
+        options={{ headerTitle: (props) => <HomeLogo {...props} /> }}
+      />
+      <Tab.Screen
+        name="Menu"
+        component={MenuItems}
+      />
+      <Tab.Screen
+        name="Login"
+        component={LoginScreen}
+      />
+      <Tab.Screen
+        name="Subscription"
+        component={SubscribeScreen}
+      />
+    </Tab.Navigator>
+
+    // <Drawer.Navigator>
+    //   <Drawer.Screen name='Home' component={WelcomeScreen} />
+    //   <Drawer.Screen name='Menu' component={MenuItems} />
+    //   <Drawer.Screen name='Login' component={LoginScreen} />
+    //   <Drawer.Screen name='Subscribe' component={SubscribeScreen} />
+    // </Drawer.Navigator>
   );
 }
 

@@ -1,4 +1,11 @@
-import { View, StyleSheet, Text, Image, ScrollView, useColorScheme, Pressable } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text, Image,
+  ScrollView,
+  useColorScheme,
+  Pressable
+} from "react-native";
 
 export default function WelcomeScreen({ navigation }) {
   const colorScheme = useColorScheme();
@@ -18,7 +25,14 @@ export default function WelcomeScreen({ navigation }) {
           accessible={true}
           accessibilityLabel={"Little lemon Logo"}
         />
-        <Text style={[styles.headerText, colorScheme === "light" ? { color: "#EDEFEE" } : { color: "#FFFFFF" }]}>Little Lemon</Text>
+        <Text
+          style={[
+            styles.headerText,
+            colorScheme === "light" ? { color: "#EDEFEE" } : { color: "#FFFFFF" }
+          ]}
+        >
+          Little Lemon
+        </Text>
       </View>
       <Text
         style={[
@@ -32,10 +46,16 @@ export default function WelcomeScreen({ navigation }) {
         and classic cocktails in a lively but casual environment. We would love
         to hear more about your experience with us!
       </Text>
-      <Pressable style={styles.button} onPress={() => navigation.navigate("Login")}>
+      <Pressable
+        style={styles.button}
+        onPress={() => navigation.navigate("Login")}
+      >
         <Text style={styles.buttonText}>Signup</Text>
       </Pressable>
-      <Pressable style={styles.button} onPress={() => navigation.navigate("Subscribe")}>
+      <Pressable
+        style={styles.button}
+        onPress={() => navigation.navigate("Subscribe")}
+      >
         <Text style={styles.buttonText}>Subscribe</Text>
       </Pressable>
     </ScrollView>
