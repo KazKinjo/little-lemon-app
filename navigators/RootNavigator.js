@@ -2,17 +2,19 @@ import { Image, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Entypo, MaterialIcons, AntDesign } from '@expo/vector-icons';
+import Constants from 'expo-constants';
 
 import WelcomeScreen from '../components/WelcomeScreen';
 import LoginScreen from '../components/LoginScreen';
 import SubscribeScreen from '../components/SubscribeScreen';
 import MenuItems from '../components/MenuItems';
+import PreferenceScreen from '../components/PreferenceScreen';
 
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
-function HomeLogo() {
-  return (
+export default function RootNavigator() {
+  const HomeLogo = () => (
     <Image
       source={require("../img/LIttle-Lemon-Logo.png")}
       resizeMode='contain'
@@ -22,10 +24,8 @@ function HomeLogo() {
         alignItems: "center",
       }}
     />
-  )
-};
+  );
 
-export default function RootNavigator() {
   return (
     <Tab.Navigator
       style={styles.container}
@@ -40,6 +40,8 @@ export default function RootNavigator() {
             return <AntDesign name="login" size={size} color={color} />
           } else if (route.name === "Subscription") {
             return <MaterialIcons name="subscriptions" size={size} color={color} />
+          } else if (route.name === "Preferences") {
+            return <AntDesign name="setting" size={size} color={color} />
           }
         },
         tabBarActiveTintColor: "#333333",
@@ -62,6 +64,10 @@ export default function RootNavigator() {
         name="Subscription"
         component={SubscribeScreen}
       />
+      <Tab.Screen
+        name="Preferences"
+        component={PreferenceScreen}
+      />
     </Tab.Navigator>
 
     // <Drawer.Navigator>
@@ -76,6 +82,8 @@ export default function RootNavigator() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: Constants.statusBarHeight,
     backgroundColor: '#495E57',
+    paddingVertical: 16,
   },
 });

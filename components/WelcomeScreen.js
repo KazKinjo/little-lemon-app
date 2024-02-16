@@ -54,7 +54,7 @@ export default function WelcomeScreen({ navigation }) {
       </Pressable>
       <Pressable
         style={styles.button}
-        onPress={() => navigation.navigate("Subscribe")}
+        onPress={() => navigation.navigate("Subscription")}
       >
         <Text style={styles.buttonText}>Subscribe</Text>
       </Pressable>
