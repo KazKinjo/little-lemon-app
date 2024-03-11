@@ -1,11 +1,12 @@
 import { useState } from "react";
 import {
-  ScrollView,
   Text,
   StyleSheet,
   TextInput,
   Pressable,
-  useColorScheme
+  useColorScheme,
+  KeyboardAvoidingView,
+  Platform
 } from 'react-native';
 
 export default function LoginScreen({ navigation }) {
@@ -15,10 +16,10 @@ export default function LoginScreen({ navigation }) {
   const colorScheme = useColorScheme();
 
   return (
-    <ScrollView
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={[
         styles.container,
-        keyboardDismissMode = "on-drag",
         colorScheme === "light"
           ? { backgroundColor: "#495E57" }
           : { backgroundColor: "#333333" }
@@ -32,23 +33,24 @@ export default function LoginScreen({ navigation }) {
             : { color: "#FFFFFF" }
         ]}
       >
-        Welcome to Little Lemon
+        Login
       </Text>
       <TextInput
         style={styles.inputBox}
-        value={email}
-        placeholder={"email"}
         onChangeText={onChangeEmail}
-        keyboardType={"email-address"}
-        clearButtonMode={"while-editing"}
+        value={email}
+        clearButtonMode="while-editing"
+        placeholder="Email address"
+        keyboardType="email-address"
       />
       <TextInput
         style={styles.inputBox}
-        value={password}
-        placeholder={"password"}
         onChangeText={onChangePassword}
+        value={password}
         secureTextEntry={true}
-        clearButtonMode={"while-editing"}
+        clearButtonMode="while-editing"
+        placeholder="Password"
+        keyboardType="default"
       />
       <Pressable
         style={styles.button}
@@ -58,7 +60,7 @@ export default function LoginScreen({ navigation }) {
           Login
         </Text>
       </Pressable>
-    </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -69,28 +71,22 @@ const styles = StyleSheet.create({
   headerText: {
     color: "#EDEFEE",
     fontSize: 30,
-    padding: 40,
-    textAlign: "center",
-  },
-  regularText: {
-    color: "#EDEFEE",
-    fontSize: 24,
-    padding: 20,
+    margin: 30,
     textAlign: "center",
   },
   inputBox: {
-    height: 40,
-    margin: 30,
     padding: 10,
-    borderWidth: 1,
-    borderRadius: 8,
-    borderColor: "#EDEFEE",
+    marginVertical: 20,
+    marginHorizontal: 30,
     backgroundColor: "#EDEFEE",
+    borderColor: "#EDEFEE",
+    borderWidth: 1,
+    borderRadius: 16,
   },
   button: {
     padding: 10,
-    marginHorizontal: 50,
     marginVertical: 20,
+    marginHorizontal: 30,
     backgroundColor: "#F4CE14",
     borderColor: "#F4CE14",
     borderWidth: 1,
