@@ -7,11 +7,11 @@ import {
   useColorScheme,
   KeyboardAvoidingView,
   Platform
-} from 'react-native';
+} from "react-native";
 
-export default function LoginScreen({ navigation }) {
-  const [email, onChangeEmail] = useState('');
-  const [password, onChangePassword] = useState('');
+export default LoginScreen = ({ navigation }) => {
+  const [email, onChangeEmail] = useState("");
+  const [password, onChangePassword] = useState("");
 
   const colorScheme = useColorScheme();
 

@@ -6,7 +6,7 @@ import Constants from 'expo-constants';
 
 import WelcomeScreen from '../components/WelcomeScreen';
 import LoginScreen from '../components/LoginScreen';
-import SubscribeScreen from '../components/SubscribeScreen';
+import SubscriptionScreen from '../components/SubscriptionScreen';
 import MenuItems from '../components/MenuItems';
 import PreferenceScreen from '../components/PreferenceScreen';
 
@@ -62,7 +62,7 @@ export default function RootNavigator() {
       />
       <Tab.Screen
         name="Subscription"
-        component={SubscribeScreen}
+        component={SubscriptionScreen}
       />
       <Tab.Screen
         name="Preferences"
@@ -74,7 +74,7 @@ export default function RootNavigator() {
     //   <Drawer.Screen name='Home' component={WelcomeScreen} />
     //   <Drawer.Screen name='Menu' component={MenuItems} />
     //   <Drawer.Screen name='Login' component={LoginScreen} />
-    //   <Drawer.Screen name='Subscribe' component={SubscribeScreen} />
+    //   <Drawer.Screen name='Subscribe' component={SubscriptionScreen} />
     // </Drawer.Navigator>
   );
 }

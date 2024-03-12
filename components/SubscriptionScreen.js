@@ -8,27 +8,36 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  TextInput
-} from "react-native"
+  TextInput,
+  useColorScheme
+} from "react-native";
+import { validateEmail } from "../utils/index";
 
-import { validateEmail } from "../utils";
-
-export default function SubscribeScreen() {
+export default SubscriptionScreen = () => {
   const [email, setEmail] = useState("");
   const isEmailValid = validateEmail(email);
+  const colorScheme = useColorScheme();
 
   return (
     <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={[
+        styles.container,
+        colorScheme === "light"
+          ? { backgroundColor: "#495E57" }
+          : { backgroundColor: "#333333" }
+      ]}
     >
       <ScrollView keyboardDismissMode="on-drag">
         <Image
-          style={styles.logo}
           source={require("../img/little-lemon-logo-main.png")}
-          resizeMode="contain"
-        />
-        <Text style={styles.headerText}>
+          style={styles.logo} />
+        <Text style={[
+          styles.headerText,
+          colorScheme === "light"
+            ? { backgroundColor: "#495E57" }
+            : { backgroundColor: "#333333" }
+        ]}>
           Subscribe to our newsletter for
           our latest delicious recipes!
         </Text>
@@ -41,18 +50,22 @@ export default function SubscribeScreen() {
           clearButtonMode="while-editing"
         />
         <Pressable
-          style={[styles.button, styles.disabled]}
+          style={[
+            styles.button,
+            !isEmailValid && styles.disabled
+          ]}
           onPress={() => {
-            Alert.alert("Thanks for subscribing, stay tuned!");
+            if (isEmailValid) {
+              Alert.alert("Thanks for subscribing, stay tuned!");
+            }
           }}
-          disabled={!isEmailValid}
         >
           <Text style={styles.buttonText}>
             Subscribe
           </Text>
         </Pressable>
       </ScrollView>
-    </KeyboardAvoidingView>
+    </KeyboardAvoidingView >
   )
 };
 
@@ -65,35 +78,41 @@ const styles = StyleSheet.create({
     width: 100,
     height: 200,
     alignSelf: "center",
-    marginVertical: 50,
+    resizeMode: "contain",
   },
   headerText: {
-    color: "#333333",
+    color: "#EDEFEE",
     fontSize: 18,
-    fontWeight: "bold",
+    marginVertical: 10,
+    marginHorizontal: 30,
     textAlign: "center",
   },
   inputBox: {
-    height: 40,
-    margin: 30,
     padding: 10,
+    marginVertical: 10,
+    marginHorizontal: 30,
+    backgroundColor: "#EDEFEE",
+    borderColor: "#EDEFEE",
     borderWidth: 1,
-    borderRadius: 8,
-    borderColor: "#333333",
-    backgroundColor: "#FFFFFF",
+    borderRadius: 16,
   },
   button: {
     padding: 10,
-    marginHorizontal: 50,
-    marginVertical: 20,
+    marginVertical: 10,
+    marginHorizontal: 30,
     backgroundColor: "#F4CE14",
     borderColor: "#F4CE14",
     borderWidth: 1,
     borderRadius: 16,
   },
   disabled: {
-    borderColor: "#A9A9A9",
+    padding: 10,
+    marginVertical: 10,
+    marginHorizontal: 30,
     backgroundColor: "#A9A9A9",
+    borderColor: "#A9A9A9",
+    borderWidth: 1,
+    borderRadius: 16,
     opacity: 0.5,
   },
   buttonText: {
