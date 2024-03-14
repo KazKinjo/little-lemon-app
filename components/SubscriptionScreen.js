@@ -1,26 +1,23 @@
 import { useState } from "react";
 import {
-  Alert,
-  Image,
-  KeyboardAvoidingView,
-  Platform,
-  Pressable,
-  ScrollView,
-  StyleSheet,
   Text,
+  View,
+  StyleSheet,
+  Image,
+  Alert,
+  Pressable,
   TextInput,
   useColorScheme
 } from "react-native";
 import { validateEmail } from "../utils/index";
 
-export default SubscriptionScreen = () => {
+export default SubscriptionScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const isEmailValid = validateEmail(email);
   const colorScheme = useColorScheme();
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    <View
       style={[
         styles.container,
         colorScheme === "light"
@@ -28,44 +25,43 @@ export default SubscriptionScreen = () => {
           : { backgroundColor: "#333333" }
       ]}
     >
-      <ScrollView keyboardDismissMode="on-drag">
-        <Image
-          source={require("../img/little-lemon-logo-main.png")}
-          style={styles.logo} />
-        <Text style={[
-          styles.headerText,
-          colorScheme === "light"
-            ? { backgroundColor: "#495E57" }
-            : { backgroundColor: "#333333" }
-        ]}>
-          Subscribe to our newsletter for
-          our latest delicious recipes!
+      <Image
+        source={require("../img/little-lemon-logo-main.png")}
+        style={styles.logo}
+      />
+      <Text style={[
+        styles.headerText,
+        colorScheme === "light"
+          ? { backgroundColor: "#495E57" }
+          : { backgroundColor: "#333333" }
+      ]}>
+        Subscribe to our newsletter for our latest delicious recipes!
+      </Text>
+      <TextInput
+        style={styles.inputBox}
+        value={email}
+        onChangeText={setEmail}
+        placeholder="Please enter your email address"
+        keyboardType="email-address"
+        clearButtonMode="while-editing"
+      />
+      <Pressable
+        style={[
+          styles.button,
+          !isEmailValid && styles.disabled
+        ]}
+        onPress={() => {
+          if (isEmailValid) {
+            Alert.alert("Thanks for subscribing, stay tuned!");
+          }
+          navigation.navigate("Home");
+        }}
+      >
+        <Text style={styles.buttonText}>
+          Subscribe
         </Text>
-        <TextInput
-          style={styles.inputBox}
-          value={email}
-          onChangeText={setEmail}
-          placeholder="Please enter your email address"
-          keyboardType="email-address"
-          clearButtonMode="while-editing"
-        />
-        <Pressable
-          style={[
-            styles.button,
-            !isEmailValid && styles.disabled
-          ]}
-          onPress={() => {
-            if (isEmailValid) {
-              Alert.alert("Thanks for subscribing, stay tuned!");
-            }
-          }}
-        >
-          <Text style={styles.buttonText}>
-            Subscribe
-          </Text>
-        </Pressable>
-      </ScrollView>
-    </KeyboardAvoidingView >
+      </Pressable>
+    </View>
   )
 };
 

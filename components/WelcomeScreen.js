@@ -1,34 +1,36 @@
 import {
+  Text,
   View,
   StyleSheet,
-  Text, Image,
-  ScrollView,
+  Image,
   useColorScheme,
-  Pressable
 } from "react-native";
 
-export default function WelcomeScreen({ navigation }) {
+export default WelcomeScreen = () => {
   const colorScheme = useColorScheme();
 
   return (
-    <ScrollView
+    <View
       style={[
         styles.container,
-        colorScheme === "light" ? { backgroundColor: "#495E57" } : { backgroundColor: "#333333" }
+        colorScheme === "light"
+          ? { backgroundColor: "#495E57" }
+          : { backgroundColor: "#333333" }
       ]}
     >
       <View style={styles.innerContainer}>
         <Image
           style={styles.logo}
           source={require("../img/little-lemon-logo-main.png")}
-          resizeMode="cover"
           accessible={true}
-          accessibilityLabel={"Little lemon Logo"}
+          accessibilityLabel="Little lemon Logo"
         />
         <Text
           style={[
             styles.headerText,
-            colorScheme === "light" ? { color: "#EDEFEE" } : { color: "#FFFFFF" }
+            colorScheme === "light"
+              ? { color: "#EDEFEE" }
+              : { color: "#FFFFFF" }
           ]}
         >
           Little Lemon
@@ -46,19 +48,7 @@ export default function WelcomeScreen({ navigation }) {
         and classic cocktails in a lively but casual environment. We would love
         to hear more about your experience with us!
       </Text>
-      <Pressable
-        style={styles.button}
-        onPress={() => navigation.navigate("Login")}
-      >
-        <Text style={styles.buttonText}>Signup</Text>
-      </Pressable>
-      <Pressable
-        style={styles.button}
-        onPress={() => navigation.navigate("Subscription")}
-      >
-        <Text style={styles.buttonText}>Subscribe</Text>
-      </Pressable>
-    </ScrollView>
+    </View>
   )
 };
 
@@ -69,36 +59,24 @@ const styles = StyleSheet.create({
   innerContainer: {
     flexDirection: "row",
     alignItems: "center",
-    margin: 10,
+    marginTop: 100,
+    marginHorizontal: 30,
   },
   headerText: {
-    fontSize: 30,
     color: "#EDEFEE",
+    fontSize: 30,
     textAlign: "center",
   },
   text: {
-    fontSize: 24,
     color: "#EDEFEE",
+    fontSize: 18,
+    marginVertical: 50,
+    marginHorizontal: 30,
     textAlign: "center",
-    padding: 20,
-    marginVertical: 8,
   },
   logo: {
-    height: 100,
-    width: 100,
+    height: 80,
+    width: 80,
+    resizeMode: "cover"
   },
-  button: {
-    padding: 10,
-    marginHorizontal: 50,
-    marginVertical: 20,
-    backgroundColor: "#F4CE14",
-    borderColor: "#F4CE14",
-    borderWidth: 1,
-    borderRadius: 16,
-  },
-  buttonText: {
-    color: "#333333",
-    fontSize: 18,
-    textAlign: "center"
-  }
 });

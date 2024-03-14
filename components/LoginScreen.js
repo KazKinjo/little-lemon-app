@@ -1,13 +1,11 @@
 import { useState } from "react";
 import {
   Text,
+  View,
   StyleSheet,
-  TextInput,
   Pressable,
+  TextInput,
   useColorScheme,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView
 } from "react-native";
 import { validateEmail } from "../utils/index";
 import { validatePassword } from "../utils/index";
@@ -20,8 +18,7 @@ export default LoginScreen = ({ navigation }) => {
   const colorScheme = useColorScheme();
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    <View
       style={[
         styles.container,
         colorScheme === "light"
@@ -29,51 +26,49 @@ export default LoginScreen = ({ navigation }) => {
           : { backgroundColor: "#333333" }
       ]}
     >
-      <ScrollView keyboardDismissMode="on-drag">
-        <Text
-          style={[
-            styles.headerText,
-            colorScheme === "light"
-              ? { color: "#EDEFEE" }
-              : { color: "#FFFFFF" }
-          ]}
-        >
+      <Text
+        style={[
+          styles.headerText,
+          colorScheme === "light"
+            ? { color: "#EDEFEE" }
+            : { color: "#FFFFFF" }
+        ]}
+      >
+        Login
+      </Text>
+      <TextInput
+        style={styles.inputBox}
+        onChangeText={onChangeEmail}
+        value={email}
+        clearButtonMode="while-editing"
+        placeholder="Email address"
+        keyboardType="email-address"
+      />
+      <TextInput
+        style={styles.inputBox}
+        onChangeText={onChangePassword}
+        value={password}
+        secureTextEntry={true}
+        clearButtonMode="while-editing"
+        placeholder="Password"
+        keyboardType="default"
+      />
+      <Pressable
+        style={[
+          styles.button,
+          (!isEmailValid || !isPasswordValid) && styles.disabled
+        ]}
+        onPress={() => {
+          if (isEmailValid && isPasswordValid) {
+            navigation.navigate("Home")
+          }
+        }}
+      >
+        <Text style={styles.buttonText}>
           Login
         </Text>
-        <TextInput
-          style={styles.inputBox}
-          onChangeText={onChangeEmail}
-          value={email}
-          clearButtonMode="while-editing"
-          placeholder="Email address"
-          keyboardType="email-address"
-        />
-        <TextInput
-          style={styles.inputBox}
-          onChangeText={onChangePassword}
-          value={password}
-          secureTextEntry={true}
-          clearButtonMode="while-editing"
-          placeholder="Password"
-          keyboardType="default"
-        />
-        <Pressable
-          style={[
-            styles.button,
-            (!isEmailValid || !isPasswordValid) && styles.disabled
-          ]}
-          onPress={() => {
-            if (isEmailValid && isPasswordValid) {
-              navigation.navigate("Home")
-            }
-          }}
-        >
-          <Text style={styles.buttonText}>
-            Login
-          </Text>
-        </Pressable>
-      </ScrollView>
-    </KeyboardAvoidingView>
+      </Pressable>
+    </View>
   );
 }
 
