@@ -57,9 +57,7 @@ export default function MenuItems() {
   const [data, setData] = useState([]);
   const colorScheme = useColorScheme();
 
-  const Separator = () => (
-    <View style={styles.separator} />
-  );
+  const Separator = () => <View style={styles.separator} />;
 
   const Header = () => (
     <Text style={styles.headerText}>
@@ -94,13 +92,11 @@ export default function MenuItems() {
   const Item = ({ name, price }) => (
     <View style={styles.innerContainer}>
       <Text style={styles.itemText}>{name}</Text>
-      <Text style={styles.itemText}>{"$" + price}</Text>
+      <Text style={styles.itemText}>{`$${price}`}</Text>
     </View>
   );
 
-  const renderItem = ({ item }) => (
-    <Item name={item.title} price={item.price} />
-  );
+  const renderItem = ({ item }) => <Item name={item.title} price={item.price} />;
 
   // const renderSectionHeader = ({ section: { title } }) => (
   //   <View style={styles.sectionContainer}>
@@ -109,25 +105,25 @@ export default function MenuItems() {
   // );
 
   return (
-    <View
-      style={[
-        styles.container,
-        colorScheme === "light" ? { backgroundColor: "#495E57" } : { backgroundColor: "#333333" }
-      ]}
-    >
-      {isLoading ? (
-        <ActivityIndicator />
-      ) : (
-        <FlatList
-          data={data}
-          keyExtractor={item => item.id}
-          renderItem={renderItem}
+    <View style={[
+      styles.container,
+      colorScheme === "light"
+        ? { backgroundColor: "#495E57" }
+        : { backgroundColor: "#333333" }
+    ]}>
+      {
+        isLoading
+          ? (<ActivityIndicator size="large" />)
+          : (<FlatList
+            data={data}
+            keyExtractor={({ id }, index) => id}
+            renderItem={renderItem}
+            ItemSeparatorComponent={Separator}
+            ListHeaderComponent={Header}
+            ListFooterComponent={Footer}
           // renderSectionHeader={renderSectionHeader}
-          ItemSeparatorComponent={Separator}
-          ListHeaderComponent={Header}
-          ListFooterComponent={Footer}
-        />
-      )}
+          />)
+      }
     </View>
   )
 };
@@ -140,7 +136,7 @@ const styles = StyleSheet.create({
   innerContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingHorizontal: 40,
+    paddingHorizontal: 30,
     paddingVertical: 20,
   },
   itemText: {
@@ -163,13 +159,13 @@ const styles = StyleSheet.create({
     textAlign: "center",
     padding: 10,
   },
-  sectionContainer: {
-    backgroundColor: "#F4CE14",
-  },
-  sectionTitle: {
-    fontSize: 26,
-    color: "#333333",
-    flexWrap: "wrap",
-    textAlign: "center"
-  }
+  // sectionContainer: {
+  //   backgroundColor: "#F4CE14",
+  // },
+  // sectionTitle: {
+  //   fontSize: 26,
+  //   color: "#333333",
+  //   flexWrap: "wrap",
+  //   textAlign: "center"
+  // }
 });
