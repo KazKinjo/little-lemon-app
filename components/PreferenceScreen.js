@@ -14,23 +14,26 @@ export default function PreferenceScreen() {
   useEffect(() => {
     (async () => {
       try {
-        const values = await AsyncStorage.multiGet(Object.keys(preferences));
-        const initialState = values.reduce((accumulator, currentValue) => {
+        const keys = await AsyncStorage.multiGet(Object.keys(preferences));
+        const initialState = keys.reduce((accumulator, currentValue) => {
           accumulator[currentValue[0]] = JSON.parse(currentValue[1]);
           return accumulator;
         }, {});
+
         setPreferences(initialState);
       } catch (e) {
         Alert.alert(`An error occurred: ${e.message}`);
       }
-    })();
+    })(); // Insert IIFE(Immediately Invoked Function Expression)
   }, []);
 
   useUpdate(() => {
     (async () => {
-      const keyValues = Object.entries(preferences).map(preference => {
-        return [preference[0], String(preference[1])];
-      });
+      const keyValues = Object
+        .entries(preferences)
+        .map((preference) => {
+          return [preference[0], String(preference[1])];
+        });
       try {
         await AsyncStorage.multiSet(keyValues);
       } catch (e) {
@@ -47,23 +50,31 @@ export default function PreferenceScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Account Preferences</Text>
-      <View style={styles.row}>
-        <Text>Push notifications</Text>
+      <Text style={styles.headerText}>
+        Account Preferences
+      </Text>
+      <View style={styles.switchContainers}>
+        <Text style={styles.text}>
+          Push notifications
+        </Text>
         <Switch
           value={preferences.pushNotifications}
           onValueChange={updateState('pushNotifications')}
         />
       </View>
-      <View style={styles.row}>
-        <Text>Marketing emails</Text>
+      <View style={styles.switchContainers}>
+        <Text style={styles.text}>
+          Marketing emails
+        </Text>
         <Switch
           value={preferences.emailMarketing}
           onValueChange={updateState('emailMarketing')}
         />
       </View>
-      <View style={styles.row}>
-        <Text>Latest news</Text>
+      <View style={styles.switchContainers}>
+        <Text style={styles.text}>
+          Latest news
+        </Text>
         <Switch
           value={preferences.latestNews}
           onValueChange={updateState('latestNews')}
@@ -73,13 +84,14 @@ export default function PreferenceScreen() {
   )
 };
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#ecf0f1',
     padding: 16,
   },
-  row: {
+  switchContainers: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingVertical: 16,
@@ -87,7 +99,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 18,
   },
-  header: {
+  headerText: {
     margin: 24,
     fontSize: 18,
     fontWeight: 'bold',

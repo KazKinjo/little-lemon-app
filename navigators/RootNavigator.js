@@ -11,38 +11,45 @@ import MenuItems from '../components/MenuItems';
 import PreferenceScreen from '../components/PreferenceScreen';
 
 const Tab = createBottomTabNavigator();
-const Drawer = createDrawerNavigator();
+// const Drawer = createDrawerNavigator();
 
 export default function RootNavigator() {
   const HomeLogo = () => (
     <Image
+      style={styles.img}
       source={require("../img/LIttle-Lemon-Logo.png")}
-      resizeMode='contain'
-      style={{
-        height: 30,
-        width: 200,
-        alignItems: "center",
-      }}
     />
   );
 
   return (
     <Tab.Navigator
+      initialRouteName="Login"
       style={styles.container}
-      initialRouteName="Home"
       screenOptions={({ route }) => ({
-        tabBarIcon: ({ size = 24, color = "black" }) => {
-          if (route.name === "Home") {
-            return <Entypo name="home" size={size} color={color} />
-          } else if (route.name === "Menu") {
-            return <MaterialIcons name="restaurant-menu" size={size} color={color} />
-          } else if (route.name === "Login") {
-            return <AntDesign name="login" size={size} color={color} />
-          } else if (route.name === "Subscription") {
-            return <MaterialIcons name="subscriptions" size={size} color={color} />
-          } else if (route.name === "Preferences") {
-            return <AntDesign name="setting" size={size} color={color} />
+        tabBarIcon: ({ size = 24, color = "#333333" }) => {
+          switch (route.name) {
+            case "Home":
+              return <Entypo name="home" size={size} color={color} />;
+            case "Menu":
+              return <MaterialIcons name="restaurant-menu" size={size} color={color} />;
+            case "Login":
+              return <AntDesign name="login" size={size} color={color} />;
+            case "Subscription":
+              return <MaterialIcons name="subscriptions" size={size} color={color} />;
+            case "Preferences":
+              return <AntDesign name="setting" size={size} color={color} />;
           }
+          // if (route.name === "Home") {
+          //   return <Entypo name="home" size={size} color={color} />
+          // } else if (route.name === "Menu") {
+          //   return <MaterialIcons name="restaurant-menu" size={size} color={color} />
+          // } else if (route.name === "Login") {
+          //   return <AntDesign name="login" size={size} color={color} />
+          // } else if (route.name === "Subscription") {
+          //   return <MaterialIcons name="subscriptions" size={size} color={color} />
+          // } else if (route.name === "Preferences") {
+          //   return <AntDesign name="setting" size={size} color={color} />
+          // }
         },
         tabBarActiveTintColor: "#333333",
       })}
@@ -79,11 +86,18 @@ export default function RootNavigator() {
   );
 }
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: Constants.statusBarHeight,
     backgroundColor: '#495E57',
     paddingVertical: 16,
+  },
+  img: {
+    height: 30,
+    width: 200,
+    alignItems: "center",
+    resizeMode: 'contain',
   },
 });

@@ -52,6 +52,7 @@ export default WelcomeScreen = () => {
   )
 };
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

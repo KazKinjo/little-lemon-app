@@ -58,28 +58,18 @@ export default function MenuItems() {
   const colorScheme = useColorScheme();
 
   const Separator = () => <View style={styles.separator} />;
-
-  const Header = () => (
-    <Text style={styles.headerText}>
-      View Menu
-    </Text>
-  );
-
-  const Footer = () => (
-    <Text style={styles.footerText}>
-      All rights reserved by Little Lemon, 2024
-    </Text>
-  );
+  const Header = () => <Text style={styles.headerText}>View Menu</Text>;
+  const Footer = () => <Text style={styles.footerText}>All rights reserved by Little Lemon, 2024</Text>;
 
   const getMenu = async () => {
     try {
-      const response = await fetch(
+      const res = await fetch(
         "https://raw.githubusercontent.com/Meta-Mobile-Developer-PC/Working-With-Data-API/main/menu-items-by-category.json"
       );
-      const json = await response.json();
+      const json = await res.json();
       setData(json.menu);
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.error(`Error, ${err}`);
     } finally {
       setLoading(false);
     }
